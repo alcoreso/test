@@ -1,13 +1,12 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>happy birthday pookie :3!</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -16,7 +15,6 @@
       position: relative;
       overflow-x: hidden;
     }
-
     .friends-messages {
       max-width: 500px;
       margin: 0 auto;
@@ -25,7 +23,6 @@
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
     form input {
       display: block;
       width: 100%;
@@ -35,7 +32,6 @@
       border: 1px solid #ccc;
       border-radius: 8px;
     }
-
     form button {
       padding: 10px 15px;
       font-size: 1em;
@@ -45,11 +41,11 @@
       border-radius: 8px;
       cursor: pointer;
     }
-
     #message-display {
       margin-top: 20px;
+      max-height: 300px;
+      overflow-y: auto;
     }
-
     .chat-bubble {
       background: #e0f7fa;
       padding: 10px 15px;
@@ -58,14 +54,13 @@
       max-width: 80%;
       position: relative;
       font-size: 0.95em;
+      word-wrap: break-word;
     }
-
     .chat-bubble strong {
       color: #00796b;
       display: block;
       margin-bottom: 4px;
     }
-
     .heart-container {
       position: fixed;
       top: 0;
@@ -75,13 +70,11 @@
       pointer-events: none;
       z-index: 9999;
     }
-
     .heart {
       position: absolute;
       font-size: 24px;
       animation: fall 5s linear forwards;
     }
-
     @keyframes fall {
       0% {
         transform: translateY(-10vh);
@@ -92,12 +85,10 @@
         opacity: 0;
       }
     }
-
     .sticker {
       position: absolute;
       font-size: 28px;
     }
-
     .sticker-1 { top: 10%; left: 5%; }
     .sticker-2 { top: 20%; right: 5%; }
     .sticker-3 { top: 40%; left: 10%; }
@@ -106,101 +97,101 @@
     .sticker-6 { top: 50%; right: 20%; }
   </style>
 </head>
-
 <body>
   <header>
     <h1>happy birthday pookie :3!</h1>
-    <p class="birthday-message">Hope you enjoy your day :p Won't say much cuz yk how much I appreciate you and make sure to remind you that almost every time. trying to do all this coding stuff.</p>
+    <p class="birthday-message">
+      Hope you enjoy your day :p Won't say much cuz yk how much I appreciate you and make sure to remind you that almost every time. trying to do all this coding stuff.
+    </p>
   </header>
 
   <section class="spotify">
     <h2>ur playlist that u already have the link ^^</h2>
-    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1oFZJTfctt3xJojg1bmgz0?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe style="border-radius:12px"
+      src="https://open.spotify.com/embed/playlist/1oFZJTfctt3xJojg1bmgz0?utm_source=generator"
+      width="100%" height="352" frameborder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      loading="lazy"></iframe>
   </section>
 
   <section class="friends-messages">
     <h2>from your friends :^D</h2>
-
     <form id="message-form">
       <input type="text" id="username" placeholder="your name" required />
       <input type="text" id="inputText" placeholder="leave a message for him!" required />
       <button type="submit">senddd</button>
     </form>
-
     <div id="message-display"></div>
   </section>
 
-  <footer>
-    <p>:p</p>
-  </footer>
+  <footer><p>:p</p></footer>
 
   <div class="heart-container"></div>
 
-  <script>
-    // Chat message functionality
-    document.addEventListener('DOMContentLoaded', function () {
-      const form = document.getElementById('message-form');
-      const usernameInput = document.getElementById('username');
-      const messageInput = document.getElementById('inputText');
-      const messageDisplay = document.getElementById('message-display');
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+  import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-database.js";
 
-      form.addEventListener('submit', function (event) {
-        event.preventDefault(); // ✅ Prevent form from reloading the page
+  // Your Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyAehurBp3QO8VWa_EHVEGjDxzV9PzSOC-E",
+    authDomain: "websjte-66c2a.firebaseapp.com",
+    databaseURL: "https://websjte-66c2a-default-rtdb.firebaseio.com",
+    projectId: "websjte-66c2a",
+    storageBucket: "websjte-66c2a.firebasestorage.app",
+    messagingSenderId: "1025076841830",
+    appId: "1:1025076841830:web:350e4758024c389efe0ca7",
+    measurementId: "G-2HKGG639YX"
+  };
 
-        const username = usernameInput.value.trim();
-        const message = messageInput.value.trim();
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
 
-        if (username && message) {
-          const bubble = document.createElement('div');
-          bubble.className = 'chat-bubble';
-          bubble.innerHTML = `<strong>${username}</strong>${message}`;
-          messageDisplay.appendChild(bubble);
+  // Get database instance
+  const database = getDatabase(app);
 
-          usernameInput.value = '';
-          messageInput.value = '';
-        }
+  // Reference to messages node
+  const messagesRef = ref(database, 'messages');
+
+  // Elements
+  const form = document.getElementById('message-form');
+  const usernameInput = document.getElementById('username');
+  const messageInput = document.getElementById('inputText');
+  const messageDisplay = document.getElementById('message-display');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const username = usernameInput.value.trim();
+    const message = messageInput.value.trim();
+
+    if (username && message) {
+      // Push message to Firebase
+      push(messagesRef, {
+        username,
+        message,
+        timestamp: Date.now()
       });
-    });
 
-    // Falling hearts animation
-    function createHeart() {
-      const heartContainer = document.querySelector('.heart-container');
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-
-      const hearts = ['❤️', '💙', '🩵', '🖤', '❤️‍🩹', '😻'];
-      heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
-
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
-
-      heartContainer.appendChild(heart);
-
-      setTimeout(() => {
-        heart.remove();
-      }, 5000);
+      // Clear input fields
+      usernameInput.value = '';
+      messageInput.value = '';
     }
+  });
 
-    setInterval(createHeart, 500);
+  // Listen for new messages and update UI
+  onValue(messagesRef, (snapshot) => {
+    messageDisplay.innerHTML = ''; // Clear current messages
 
-    // Add cute stickers
-    window.addEventListener('load', function () {
-      const stickers = [
-        { emoji: '🌈', class: 'sticker-1' },
-        { emoji: '🥺', class: 'sticker-2' },
-        { emoji: '😈', class: 'sticker-3' },
-        { emoji: '👅', class: 'sticker-4' },
-        { emoji: '😻', class: 'sticker-5' },
-        { emoji: '💥', class: 'sticker-6' }
-      ];
-
-      stickers.forEach(sticker => {
-        const stickerElement = document.createElement('div');
-        stickerElement.classList.add('sticker', sticker.class);
-        stickerElement.innerHTML = sticker.emoji;
-        document.body.appendChild(stickerElement);
+    const messages = snapshot.val();
+    if (messages) {
+      Object.values(messages).forEach(({ username, message }) => {
+        const bubble = document.createElement('div');
+        bubble.className = 'chat-bubble';
+        bubble.innerHTML = `<strong>${username}</strong>${message}`;
+        messageDisplay.appendChild(bubble);
       });
-    });
-  </script>
-</body>
-</html>
+      // Scroll to the bottom so newest messages show
+      messageDisplay.scrollTop = messageDisplay.scrollHeight;
+    }
+  });
+</script>
