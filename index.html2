@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Chat</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+
+    .friends-messages {
+      max-width: 500px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 1em;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 15px;
+      font-size: 1em;
+      border: none;
+      border-radius: 6px;
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+
+    .chat-bubble {
+      background: #e0f7fa;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      border-radius: 15px;
+    }
+
+    .chat-bubble strong {
+      display: block;
+      color: #00796b;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="friends-messages">
+    <h2>from your friends :^D</h2>
+    <form id="message-form">
+      <input type="text" id="username" placeholder="your name" required />
+      <input type="text" id="inputText" placeholder="leave a message for him!" required />
+      <button type="submit">senddd</button>
+    </form>
+    <div id="message-display"></div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('message-form');
+      const usernameInput = document.getElementById('username');
+      const messageInput = document.getElementById('inputText');
+      const messageDisplay = document.getElementById('message-display');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault(); // ✅ This should stop the reload
+
+        const username = usernameInput.value.trim();
+        const message = messageInput.value.trim();
+
+        if (username && message) {
+          const bubble = document.createElement('div');
+          bubble.className = 'chat-bubble';
+          bubble.innerHTML = `<strong>${username}</strong>${message}`;
+          messageDisplay.appendChild(bubble);
+
+          usernameInput.value = '';
+          messageInput.value = '';
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
