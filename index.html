@@ -8,7 +8,32 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-</head>
+
+  <script>
+  document.getElementById('message-form').addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent page reload
+
+    const username = document.getElementById('username').value.trim();
+    const message = document.getElementById('inputText').value.trim();
+
+    if (username !== "" && message !== "") {
+      // Create chat bubble
+      const bubble = document.createElement('div');
+      bubble.classList.add('chat-bubble');
+      bubble.innerHTML = `<strong>${username}</strong>${message}`;
+
+      // Add to message display container
+      document.getElementById('message-display').appendChild(bubble);
+
+      // Clear inputs
+      document.getElementById('username').value = "";
+      document.getElementById('inputText').value = "";
+    } else {
+      alert("Please fill out both name and message!");
+    }
+  });
+    
+  </head>
 <body>
   <header>
     <h1>happy birthday pookie :3!</h1>
@@ -41,7 +66,7 @@
   .friends-messages {
     max-width: 500px;
     margin: 0 auto;
-    background: #fff;
+    background: #94c9ff;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -94,28 +119,6 @@
   </footer>
 
 <script>
-  document.getElementById('message-form').addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent page reload
-
-    const username = document.getElementById('username').value.trim();
-    const message = document.getElementById('inputText').value.trim();
-
-    if (username !== "" && message !== "") {
-      // Create chat bubble
-      const bubble = document.createElement('div');
-      bubble.classList.add('chat-bubble');
-      bubble.innerHTML = `<strong>${username}</strong>${message}`;
-
-      // Add to message display container
-      document.getElementById('message-display').appendChild(bubble);
-
-      // Clear inputs
-      document.getElementById('username').value = "";
-      document.getElementById('inputText').value = "";
-    } else {
-      alert("Please fill out both name and message!");
-    }
-  });
 
           // Falling hearts animation
     function createHeart() {
