@@ -23,7 +23,7 @@
     <section class="friends-messages">
     <h2>Messages from ur friends</h2>
     <form id="message-form">
-      <textarea id="message-input" placeholder="Leave a birthday message..." required></textarea>
+      <textarea id="message-input" placeholder="leave a message for him!" required></textarea>
       <button type="submit">Send Message</button>
     </form>
     <div id="message-display"></div>
@@ -53,7 +53,7 @@
       heart.classList.add('heart');
       
       // Random heart emojis for variety
-      const hearts = ['❤️', '💙', '🩵', ' 🖤', '❤️‍🩹', '😻'];
+      const hearts = ['❤️', '💙', '🩵', '🖤', '❤️‍🩹', '😻'];
       heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
 
             heart.style.left = Math.random() * 100 + 'vw';
