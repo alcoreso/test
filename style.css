@@ -176,6 +176,11 @@ h2 {
   min-height: 100px;
 }
 
+#messageContainer {
+  display: block; /* Make sure it's set to block or inline-block */
+  visibility: visible; /* Ensure it's visible */
+}
+
 button {
   background: linear-gradient(45deg, #FF69B4, #FF1493);
   color: white;
