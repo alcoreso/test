@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>happy birthday pookie :3!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>happy birthday pookie :3!</h1>
+    <p class="birthday-message">Hope you enjoy your day :p Won't say much cuz yk how much I appreciate you and make sure to remind you that almost every time. trying to do all this coding stuff.</p>
+  </header>
+
+    <section class="spotify">
+    <h2>ur playlist that u already have the link ^^</h2>
+    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1oFZJTfctt3xJojg1bmgz0?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  </section>
+
+    <section class="friends-messages">
+    <h2>Messages from ur friends</h2>
+    <form id="message-form">
+      <textarea id="message-input" placeholder="Leave a birthday message..." required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <div id="message-display"></div>
+  </section>
+
+    <footer>
+    <p>:p</p>
+  </footer>
+
+    <script>
+    document.getElementById('message-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const message = document.getElementById('message-input').value;
+      if (message) {
+        const messageDisplay = document.getElementById('message-display');
+        const newMessage = document.createElement('p');
+        newMessage.textContent = message;
+        messageDisplay.appendChild(newMessage);
+        document.getElementById('message-input').value = '';
+      }
+    });
+
+          // Falling hearts animation
+    function createHeart() {
+      const heartContainer = document.querySelector('.heart-container');
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      
+      // Random heart emojis for variety
+      const hearts = ['❤️', '💙', '🩵', ' 🖤', '❤️‍🩹', '😻'];
+      heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+
+            heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+
+            heartContainer.appendChild(heart);
+
+            setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+
+          setInterval(createHeart, 500);
+
+          // Add cute stickers on page load
+    window.addEventListener('load', function() {
+      const stickers = [
+        { emoji: '🌈', class: 'sticker-1' },
+        { emoji: '🥺', class: 'sticker-2' },
+        { emoji: '😈', class: 'sticker-3' },
+        { emoji: '👅', class: 'sticker-4' },
+        { emoji: '😻', class: 'sticker-5' },
+        { emoji: '💥', class: 'sticker-6' }
+
+
+        
+      stickers.forEach(sticker => {
+        stickerElement.classList.add('sticker', sticker.class);
+        stickerElement.innerHTML = sticker.emoji;
+        document.body.appendChild(stickerElement);
+      });
+    });
+  </script>
+
+  <body>
+<div class="heart-container"></div>
+
+    <html>
