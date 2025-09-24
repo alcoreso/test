@@ -8,118 +8,183 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-    
-  </head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #6bb5ff;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .friends-messages {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    form input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    form button {
+      padding: 10px 15px;
+      font-size: 1em;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #message-display {
+      margin-top: 20px;
+    }
+
+    .chat-bubble {
+      background: #e0f7fa;
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      border-radius: 15px;
+      max-width: 80%;
+      position: relative;
+      font-size: 0.95em;
+    }
+
+    .chat-bubble strong {
+      color: #00796b;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .heart-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: fall 5s linear forwards;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+    .sticker {
+      position: absolute;
+      font-size: 28px;
+    }
+
+    .sticker-1 { top: 10%; left: 5%; }
+    .sticker-2 { top: 20%; right: 5%; }
+    .sticker-3 { top: 40%; left: 10%; }
+    .sticker-4 { bottom: 20%; right: 15%; }
+    .sticker-5 { bottom: 10%; left: 20%; }
+    .sticker-6 { top: 50%; right: 20%; }
+  </style>
+</head>
+
 <body>
   <header>
     <h1>happy birthday pookie :3!</h1>
     <p class="birthday-message">Hope you enjoy your day :p Won't say much cuz yk how much I appreciate you and make sure to remind you that almost every time. trying to do all this coding stuff.</p>
   </header>
 
-    <section class="spotify">
+  <section class="spotify">
     <h2>ur playlist that u already have the link ^^</h2>
-    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1oFZJTfctt3xJojg1bmgz0?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1oFZJTfctt3xJojg1bmgz0?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
   </section>
 
   <section class="friends-messages">
-  <h2>from your friends :^D</h2>
+    <h2>from your friends :^D</h2>
 
-  <form id="message-form">
-    <input type="text" id="username" placeholder="your name" required />
-    <input type="text" id="inputText" placeholder="leave a message for him!" required />
-    <button type="submit">senddd</button>
-  </form>
-  <div id="message-display"></div>
-</section>
+    <form id="message-form">
+      <input type="text" id="username" placeholder="your name" required />
+      <input type="text" id="inputText" placeholder="leave a message for him!" required />
+      <button type="submit">senddd</button>
+    </form>
 
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #6bb5ff;
-    padding: 20px;
-  }
+    <div id="message-display"></div>
+  </section>
 
-  .friends-messages {
-    max-width: 500px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
-
-  form input {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-  }
-
-  form button {
-    padding: 10px 15px;
-    font-size: 1em;
-    background: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-
-  #message-display {
-    margin-top: 20px;
-  }
-
-  .chat-bubble {
-    background: #e0f7fa;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    border-radius: 15px;
-    max-width: 80%;
-    position: relative;
-    font-size: 0.95em;
-  }
-
-  .chat-bubble strong {
-    color: #00796b;
-    display: block;
-    margin-bottom: 4px;
-  }
-</style>
-
-
-    <footer>
+  <footer>
     <p>:p</p>
   </footer>
 
-<script>
+  <div class="heart-container"></div>
 
-          // Falling hearts animation
+  <script>
+    // Chat message functionality
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('message-form');
+      const usernameInput = document.getElementById('username');
+      const messageInput = document.getElementById('inputText');
+      const messageDisplay = document.getElementById('message-display');
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault(); // ✅ Prevent form from reloading the page
+
+        const username = usernameInput.value.trim();
+        const message = messageInput.value.trim();
+
+        if (username && message) {
+          const bubble = document.createElement('div');
+          bubble.className = 'chat-bubble';
+          bubble.innerHTML = `<strong>${username}</strong>${message}`;
+          messageDisplay.appendChild(bubble);
+
+          usernameInput.value = '';
+          messageInput.value = '';
+        }
+      });
+    });
+
+    // Falling hearts animation
     function createHeart() {
       const heartContainer = document.querySelector('.heart-container');
       const heart = document.createElement('div');
       heart.classList.add('heart');
-      
-      // Random heart emojis for variety
+
       const hearts = ['❤️', '💙', '🩵', '🖤', '❤️‍🩹', '😻'];
       heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
 
-            heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.left = Math.random() * 100 + 'vw';
       heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
 
-            heartContainer.appendChild(heart);
+      heartContainer.appendChild(heart);
 
-            setTimeout(() => {
+      setTimeout(() => {
         heart.remove();
       }, 5000);
     }
 
-          setInterval(createHeart, 500);
+    setInterval(createHeart, 500);
 
-          // Add cute stickers on page load
-    window.addEventListener('load', function() {
+    // Add cute stickers
+    window.addEventListener('load', function () {
       const stickers = [
         { emoji: '🌈', class: 'sticker-1' },
         { emoji: '🥺', class: 'sticker-2' },
@@ -127,42 +192,15 @@
         { emoji: '👅', class: 'sticker-4' },
         { emoji: '😻', class: 'sticker-5' },
         { emoji: '💥', class: 'sticker-6' }
+      ];
 
-
-        
       stickers.forEach(sticker => {
+        const stickerElement = document.createElement('div');
         stickerElement.classList.add('sticker', sticker.class);
         stickerElement.innerHTML = sticker.emoji;
         document.body.appendChild(stickerElement);
       });
     });
-
-  <script>
-  document.getElementById('message-form').addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent page reload
-
-    const username = document.getElementById('username').value.trim();
-    const message = document.getElementById('inputText').value.trim();
-
-    if (username !== "" && message !== "") {
-      // Create chat bubble
-      const bubble = document.createElement('div');
-      bubble.classList.add('chat-bubble');
-      bubble.innerHTML = `<strong>${username}</strong>${message}`;
-
-      // Add to message display container
-      document.getElementById('message-display').appendChild(bubble);
-
-      // Clear inputs
-      document.getElementById('username').value = "";
-      document.getElementById('inputText').value = "";
-    } else {
-      alert("Please fill out both name and message!");
-    }
-  });
   </script>
-
-  <body>
-<div class="heart-container"></div>
-
-    <html>
+</body>
+</html>
