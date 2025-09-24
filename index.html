@@ -21,13 +21,37 @@
   </section>
 
     <section class="friends-messages">
-    <h2>Messages from ur friends</h2>
+    <h2>from your friends :^D</h2>
     <form id="message-form">
-      <textarea id="message-input" placeholder="leave a message for him!" required></textarea>
-      <button type="submit">Send Message</button>
+        <input type="text" id="inputText" placeholder="leave a message for him!." />
+        <div id="messageContainer"></div>
+        <button type="submit">senddd</button>
     </form>
     <div id="message-display"></div>
-  </section>
+</section>
+
+<script>
+    // This is where the JavaScript goes
+    document.getElementById('message-form').addEventListener('submit', function(event) {
+        // Prevent the form from submitting and refreshing the page
+        event.preventDefault();
+
+        // Get the input value
+        const message = document.getElementById('inputText').value;
+
+        // Check if the input is not empty
+        if (message.trim() !== "") {
+            // Display the message inside the message-display div
+            document.getElementById('message-display').innerText = message;
+        } else {
+            // If empty, display a default message
+            document.getElementById('message-display').innerText = "Please enter a message!";
+        }
+
+        // Clear the input field after submission
+        document.getElementById('inputText').value = "";
+    });
+</script>
 
 
     <footer>
